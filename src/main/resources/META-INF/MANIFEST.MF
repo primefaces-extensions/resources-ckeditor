@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Created-By: Thomas Andraschko
+Bundle-ManifestVersion: 2
+Bundle-Name: primefaces.extensions.ckeditor.resources
+Bundle-Description: Package PrimeFaces Extensions CKEditor Resources in an OSGi bundle
+Bundle-Version: 3.6.2
+Bundle-SymbolicName: org.primefaces.extensions.resources.ckeditor

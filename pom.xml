@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- $Id$ -->
+    <parent>
+        <groupId>org.primefaces.extensions.buildsystem.maven2</groupId>
+        <artifactId>master</artifactId>
+        <version>0.2-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.primefaces.extensions.resources</groupId>
+    <artifactId>ckeditor</artifactId>
+    <packaging>jar</packaging>
+    <version>3.6.2</version>
+    <name>ckeditor-resources</name>
+    <description>
+        <![CDATA[CKEditor Resources for PrimeFaces Extensions Project for Maven.]]>
+    </description>
+    <url>http://code.google.com/p/primefaces-extensions</url>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/primefaces-extensions/issues/list</url>
+    </issueManagement>
+
+    <inceptionYear>2011</inceptionYear>
+
+    <scm>
+        <connection>scm:svn:http://primefaces-extensions.googlecode.com/svn/primefaces-extensions/trunk</connection>
+        <developerConnection>scm:svn:https://primefaces-extensions.googlecode.com/svn/primefaces-extensions/trunk</developerConnection>
+        <url>http://code.google.com/p/primefaces-extensions/source/browse/#svn/primefaces-extensions/trunk</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>andraschko</id>
+            <name>Thomas Andraschko</name>
+            <email>zoigln@googlemail.com</email>
+            <roles>
+                <role>Buildmaster</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>varaksin</id>
+            <name>Oleg Varaksin</name>
+            <email>ovaraksin@googlemail.com</email>
+            <roles>
+                <role>Buildmaster</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
