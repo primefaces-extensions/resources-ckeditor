@@ -2,6 +2,5 @@ Manifest-Version: 1.0
 Created-By: PrimeFaces Extensions
 Bundle-ManifestVersion: 2
 Bundle-Name: primefaces.extensions.resources.ckeditor
-Bundle-Description: Package PrimeFaces Extensions CKEditor Resources in an OSGi bundle
-Bundle-Version: 0.2-SNAPSHOT
+Bundle-Description: PrimeFaces Extensions CKEditor Resources
 Bundle-SymbolicName: org.primefaces.extensions.resources.ckeditor
