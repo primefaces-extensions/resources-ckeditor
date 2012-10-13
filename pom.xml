@@ -11,7 +11,7 @@
     <groupId>org.primefaces.extensions</groupId>
     <artifactId>resources-ckeditor</artifactId>
     <packaging>jar</packaging>
-    <version>0.6.1-SNAPSHOT</version>
+    <version>0.6.1</version>
     <name>resources-ckeditor</name>
     <description>
         <![CDATA[CKEditor Resources for PrimeFaces Extensions Project for Maven.]]>
@@ -35,9 +35,9 @@
     <inceptionYear>2011</inceptionYear>
 
     <scm>
-        <connection>scm:svn:http://primefaces-extensions.googlecode.com/svn/resources/ckeditor/trunk</connection>
-        <developerConnection>scm:svn:https://primefaces-extensions.googlecode.com/svn/resources/ckeditor/trunk</developerConnection>
-        <url>http://code.google.com/p/primefaces-extensions/source/browse/#svn/resources/ckeditor/trunk</url>
+        <connection>scm:svn:http://primefaces-extensions.googlecode.com/svn/resources/ckeditor/tags/resources-ckeditor-0.6.1</connection>
+        <developerConnection>scm:svn:https://primefaces-extensions.googlecode.com/svn/resources/ckeditor/tags/resources-ckeditor-0.6.1</developerConnection>
+        <url>http://code.google.com/p/primefaces-extensions/source/browse/#svn/resources/ckeditor/tags/resources-ckeditor-0.6.1</url>
     </scm>
     
     <developers>
