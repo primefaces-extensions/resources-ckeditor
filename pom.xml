@@ -35,9 +35,9 @@
     <inceptionYear>2011</inceptionYear>
 
     <scm>
-        <connection>scm:svn:http://primefaces-extensions.googlecode.com/svn/resources/ckeditor/trunk</connection>
-        <developerConnection>scm:svn:https://primefaces-extensions.googlecode.com/svn/resources/ckeditor/trunk</developerConnection>
-        <url>http://code.google.com/p/primefaces-extensions/source/browse/#svn/resources/ckeditor/trunk</url>
+        <connection>scm:git:git@github.com:primefaces-extensions/resources-ckeditor.git</connection>
+        <developerConnection>scm:git:git@github.com:primefaces-extensions/resources-ckeditor.git</developerConnection>
+        <url>https://github.com/primefaces-extensions/resources-ckeditor</url>
     </scm>
     
     <developers>
