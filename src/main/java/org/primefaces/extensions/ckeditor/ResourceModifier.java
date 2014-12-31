@@ -24,7 +24,7 @@ import org.apache.commons.io.FileUtils;
 
 public class ResourceModifier
 {    
-    private static final String ROOT_PATH = "/home/tandraschko/NetBeansProjects/pfe/resources-ckeditor/";
+    private static final String ROOT_PATH = "/home/tandraschko/NetBeansProjects/primefaces-extensions/resources-ckeditor/";
     
     private final static String[] SKINS = { "moono", "kama" };
 
@@ -85,8 +85,38 @@ public class ResourceModifier
                         "url\\(images/hidpi/lock.png\\)",
                         "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/hidpi/lock.png']}\"\\)");
 
+                fileContent = fileContent.replaceAll(
+                        "url\\(images/sprites.png\\)",
+                        "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/sprites.png']}\"\\)");
+                
+                fileContent = fileContent.replaceAll(
+                        "url\\(images/sprites_ie6.png\\)",
+                        "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/sprites_ie6.png']}\"\\)");
+                
+                fileContent = fileContent.replaceAll(
+                        "url\\(images/mini\\.gif\\)",
+                        "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/mini\\.gif']}\"\\)");
+
+                fileContent = fileContent.replaceAll(
+                        "url\\(images/lock-open.png\\)",
+                        "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/lock-open.png']}\"\\)");
+                
+                fileContent = fileContent.replaceAll(
+                        "url\\(images/hidpi/lock-open.png\\)",
+                        "url\\(\"#{resource['primefaces-extensions:ckeditor/skins/" + skin + "/images/hidpi/lock-open.png']}\"\\)");
+                
                 FileUtils.writeStringToFile(file, fileContent);
             }
+            
+            String fileContent = "";
+            File file = null;
+            
+            // modify smileys plugin to load the smileys via CKEditor.getUrl
+            file = new File(ROOT_PATH + "src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
+            fileContent = FileUtils.readFileToString(file).replaceAll(
+                    "CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
+                    "CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
+            FileUtils.writeStringToFile(file, fileContent);
             
         }
     }   
