@@ -22,75 +22,87 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
 public class ResourceModifier {
 
-	private static final String ROOT_PATH = System.getProperty("user.dir");
-
-	private final static String[] SKINS = { "Moono_blue", "moonocolor", "kama", "office2013", "icy_orange", };
+	private static final String PROJECT_DIRECTORY = System.getProperty("user.dir");
 
 	public static void main(String[] args) throws IOException {
 
-		System.err.println("######## Modify skin styles....");
+        String resourcesDirectory = PROJECT_DIRECTORY + "/src/main/resources/META-INF/resources/primefaces-extensions/";
 
-		for (String skin : SKINS) {
+        System.err.println("######## Modify skin styles....");
 
+        File skinsPath = new File(PROJECT_DIRECTORY + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/skins/");
+        
+		for (String skin : skinsPath.list()) {
 			System.err.println("#### Modify skin '" + skin + "'");
-			String ckeditorPath = ROOT_PATH + "\\src\\main\\resources\\META-INF\\resources\\primefaces-extensions\\";
-			File skinPath = new File(
-					ROOT_PATH + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/skins/" + skin);
 
-			for (File file : skinPath.listFiles()) {
+			File skinDirectory = new File(resourcesDirectory + "ckeditor/skins/" + skin);
+            String relativeSkinPath =  StringUtils.replace(
+                        StringUtils.replace(skinDirectory.getPath(), resourcesDirectory, ""),
+                        "\\", 
+                        "/");
 
-				if (!file.getName().endsWith(".css")) {
+			for (File resourceToModify : skinDirectory.listFiles()) {
+
+                // modify css only
+				if (!resourceToModify.getName().endsWith(".css")) {
 					continue;
 				}
-				System.err.println("## Modify file '" + file.getName() + "'");
 
-				String fileContent = FileUtils.readFileToString(file);
-				
-                for (File resource : getResourcesList(skinPath)) {
+				System.err.println("## Modify file '" + resourceToModify.getName() + "'");
 
-					String resourceName = resource.getName();
-					String resourceRelativePath = StringUtils.replace(
-                            StringUtils.replace(resource.getPath(), ckeditorPath, ""), "\\", "/");
+				String fileContent = FileUtils.readFileToString(resourceToModify);
+                List<File> allSkinResources = getResourcesList(skinDirectory);
 
-					System.out.println(resourceName + "   -    " + resourceRelativePath);
+                // loop all possible image references
+				for (File resource : allSkinResources) {
+                    
+                    // we just need to check included images
+                    if (resource.getName().endsWith(".css")) {
+                        continue;
+                    }
+
+					String relativeResourcePath = StringUtils.replace(
+                            StringUtils.replace(resource.getPath(), resourcesDirectory, ""),
+                            "\\", 
+                            "/");
+                    String resourceName = StringUtils.replace(
+                            resource.getAbsolutePath().replace(skinDirectory.getAbsolutePath(), ""),
+                            "\\",
+                            "/");
+
+                    if (resourceName.startsWith("/")) {
+                        resourceName = resourceName.substring(1);
+                    }
 
 					fileContent = fileContent.replaceAll("url\\(" + resourceName + "\\)",
-							"url\\(\"#{resource['primefaces-extensions:" + resourceRelativePath + "']}\"\\)");
-
-					String value = "\\(icons.png\\?t=a35abfe";
-					String path = StringUtils.replace(StringUtils.replace(skinPath.getPath(), ckeditorPath, ""), "\\", "/");
-
-					String replaceWith = "(\"#{resource['primefaces-extensions:" + path + "/" + "icons.png"
-							+ "']}&t=a35abfe\"";
-
-					System.out.println(value + " ###### with : " + replaceWith);
-
-					fileContent = fileContent.replaceAll(value, replaceWith);
-
+							"url\\(\"#{resource['primefaces-extensions:" + relativeResourcePath + "']}\"\\)");
 				}
-				FileUtils.writeStringToFile(file, fileContent);
-			}
-		}
- 
-        String fileContent = "";
-        File file = null;
 
-        // modify smileys plugin to load the smileys via CKEditor.getUrl
-        System.err.println("######## Modify smiley plugin....");
-        file = new File(ROOT_PATH
-                + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
-        fileContent = FileUtils.readFileToString(file).replaceAll(
-                "CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
-                "CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
-        FileUtils.writeStringToFile(file, fileContent);
+                // icons.png
+                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=a35abfe",
+                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=a35abfe\"");
+                
+				FileUtils.writeStringToFile(resourceToModify, fileContent);
+			}
+
+			String fileContent = "";
+			File file = null;
+
+			// modify smileys plugin to load the smileys via CKEditor.getUrl
+			file = new File(PROJECT_DIRECTORY
+					+ "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
+			fileContent = FileUtils.readFileToString(file).replaceAll(
+					"CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
+					"CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
+			FileUtils.writeStringToFile(file, fileContent);
+
+		}
 	}
 
 	private static List<File> getResourcesList(File file) {
