@@ -29,14 +29,17 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
 public class ResourceModifier {
+
 	private static final String ROOT_PATH = System.getProperty("user.dir");
 
 	private final static String[] SKINS = { "Moono_blue", "moonocolor", "kama", "office2013", "icy_orange", };
 
 	public static void main(String[] args) throws IOException {
+
 		System.err.println("######## Modify skin styles....");
 
 		for (String skin : SKINS) {
+
 			System.err.println("#### Modify skin '" + skin + "'");
 			String ckeditorPath = ROOT_PATH + "\\src\\main\\resources\\META-INF\\resources\\primefaces-extensions\\";
 			File skinPath = new File(
@@ -50,42 +53,20 @@ public class ResourceModifier {
 				System.err.println("## Modify file '" + file.getName() + "'");
 
 				String fileContent = FileUtils.readFileToString(file);
-				for (File resource : getResourcesList(skinPath)) {
+				
+                for (File resource : getResourcesList(skinPath)) {
+
 					String resourceName = resource.getName();
-					String resourceRelativePath = StringUtils
-							.replace(StringUtils.replace(resource.getPath(), ckeditorPath, ""), "\\", "/");
+					String resourceRelativePath = StringUtils.replace(
+                            StringUtils.replace(resource.getPath(), ckeditorPath, ""), "\\", "/");
+
 					System.out.println(resourceName + "   -    " + resourceRelativePath);
 
 					fileContent = fileContent.replaceAll("url\\(" + resourceName + "\\)",
 							"url\\(\"#{resource['primefaces-extensions:" + resourceRelativePath + "']}\"\\)");
 
-					// Pattern regex =
-					// Pattern.compile("url\\(icons\\.png\\?t=\\w{7}\\)");
-					// Matcher regexMatcher = regex.matcher(fileContent);
-					//
-					// List<String> allMatches = new ArrayList<String>();
-					// while (regexMatcher.find()) {
-					// allMatches.add(regexMatcher.group());
-					// }
-					// System.out.println(allMatches);
-					//
-					// if (!allMatches.isEmpty()) {
-					// System.out.println(allMatches);
-					// for (String icon : allMatches) {
-					// String value = icon.replace("url(", "").replace(")",
-					// "").replace("?", "\\?");
-					// String replaceWith =
-					// "\"#{resource['primefaces-extensions:" + value + "']}\"";
-					//
-					// //System.out.println(value + " ###### with :" +
-					// replaceWith);
-					//
-					// fileContent = fileContent.replaceAll(value, replaceWith);
-					// }
-					// }
 					String value = "\\(icons.png\\?t=a35abfe";
-					String path = StringUtils.replace(StringUtils.replace(skinPath.getPath(), ckeditorPath, ""), "\\",
-							"/");
+					String path = StringUtils.replace(StringUtils.replace(skinPath.getPath(), ckeditorPath, ""), "\\", "/");
 
 					String replaceWith = "(\"#{resource['primefaces-extensions:" + path + "/" + "icons.png"
 							+ "']}&t=a35abfe\"";
@@ -97,19 +78,19 @@ public class ResourceModifier {
 				}
 				FileUtils.writeStringToFile(file, fileContent);
 			}
-
-			String fileContent = "";
-			File file = null;
-
-			// modify smileys plugin to load the smileys via CKEditor.getUrl
-			file = new File(ROOT_PATH
-					+ "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
-			fileContent = FileUtils.readFileToString(file).replaceAll(
-					"CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
-					"CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
-			FileUtils.writeStringToFile(file, fileContent);
-
 		}
+ 
+        String fileContent = "";
+        File file = null;
+
+        // modify smileys plugin to load the smileys via CKEditor.getUrl
+        System.err.println("######## Modify smiley plugin....");
+        file = new File(ROOT_PATH
+                + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
+        fileContent = FileUtils.readFileToString(file).replaceAll(
+                "CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
+                "CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
+        FileUtils.writeStringToFile(file, fileContent);
 	}
 
 	private static List<File> getResourcesList(File file) {
