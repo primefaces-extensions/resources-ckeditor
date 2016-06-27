@@ -26,6 +26,11 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * Steps to update:
+ * - Delete all files in the src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/ directory
+ * - Add empty skins.js in every skin directory
+ */
 public class ResourceModifier {
 
 	private static final String PROJECT_DIRECTORY = System.getProperty("user.dir");
