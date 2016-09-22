@@ -2,14 +2,12 @@
     <parent>
         <groupId>org.primefaces.extensions</groupId>
         <artifactId>master-pom</artifactId>
-        <version>6.0.0</version>
+        <version>6.1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.primefaces.extensions</groupId>
     <artifactId>resources-ckeditor</artifactId>
     <packaging>jar</packaging>
-    <version>6.1.0-SNAPSHOT</version>
     <name>resources-ckeditor</name>
     <description>
         <![CDATA[CKEditor Resources for PrimeFaces Extensions Project for Maven.]]>
@@ -31,8 +29,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:primefaces-extensions/resources-ckeditor.git</connection>
-        <developerConnection>scm:git:git@github.com:primefaces-extensions/resources-ckeditor.git</developerConnection>
+        <connection>scm:git:git://github.com/primefaces-extensions/resources-ckeditor.git</connection>
+        <developerConnection>scm:git:ssh://github.com:primefaces-extensions/resources-ckeditor.git</developerConnection>
         <url>https://github.com/primefaces-extensions/resources-ckeditor</url>
         <tag>HEAD</tag>
     </scm>
@@ -58,10 +56,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-			<scope>compile</scope>
-		</dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
