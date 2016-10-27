@@ -92,8 +92,8 @@ public class ResourceModifier {
 				}
 
                 // icons.png
-                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=a35abfe",
-                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=a35abfe\"");
+                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=3876e73",
+                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=3876e73\"");
                 
 				FileUtils.writeStringToFile(resourceToModify, fileContent);
 			}
