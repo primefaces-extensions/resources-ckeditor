@@ -31,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
  * - Delete all files in the src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/ directory
  * - extract new ckeditor files
  * - remove samples dir
- * - Add an empty skin.js file to each skin directory
+ * - Add an empty skin.js file to the skin directory which does not contain a default skin.js
  */
 public class ResourceModifier {
 
