@@ -92,8 +92,13 @@ public class ResourceModifier {
 				}
 
                 // icons.png
-                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=3876e73",
-                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=3876e73\"");
+                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=GAGE",
+                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=GAGE\"");
+                
+                // icons_hidpi.png
+                fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=GAGE",
+                        "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=GAGE\"");
+                
                 
 				FileUtils.writeStringToFile(resourceToModify, fileContent);
 			}
