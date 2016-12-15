@@ -117,8 +117,9 @@ public class ResourceModifier {
 			// modify copyFormatter plugin to load copyFormatter.css via CKEditor.getUrl
 			file = new File(resourcesDirectory
 					+ "ckeditor/ckeditor.js");
-			fileContent = FileUtils.readFileToString(file).replaceAll("this.path\\+\"styles/copyformatting.css\"", "CKEDITOR.getUrl(this.path\\+\"styles/copyformatting.css\")");
-
+			fileContent = FileUtils.readFileToString(file).replaceAll(
+					"this.path\\+\"styles/copyformatting.css\"", 
+					"CKEDITOR.getUrl(this.path\\+\"styles/copyformatting.css\")");
 			FileUtils.writeStringToFile(file, fileContent);
 		}
 	}
