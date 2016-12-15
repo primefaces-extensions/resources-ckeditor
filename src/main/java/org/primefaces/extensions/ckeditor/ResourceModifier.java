@@ -113,7 +113,13 @@ public class ResourceModifier {
 					"CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
 					"CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
 			FileUtils.writeStringToFile(file, fileContent);
+			
+			// modify copyFormatter plugin to load copyFormatter.css via CKEditor.getUrl
+			file = new File(resourcesDirectory
+					+ "ckeditor/ckeditor.js");
+			fileContent = FileUtils.readFileToString(file).replaceAll("this.path\\+\"styles/copyformatting.css\"", "CKEDITOR.getUrl(this.path\\+\"styles/copyformatting.css\")");
 
+			FileUtils.writeStringToFile(file, fileContent);
 		}
 	}
 
