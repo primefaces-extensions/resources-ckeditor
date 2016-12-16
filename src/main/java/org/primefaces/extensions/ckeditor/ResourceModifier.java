@@ -125,6 +125,22 @@ public class ResourceModifier {
 				"this.path\\+\"styles/copyformatting.css\"", 
 				"CKEDITOR.getUrl(this.path\\+\"styles/copyformatting.css\")");
 		FileUtils.writeStringToFile(file, fileContent);
+		
+		// modify scayt plugin to load scayt.css via CKEditor.getUrl
+		file = new File(resourcesDirectory
+                        + "ckeditor/ckeditor.js");
+		fileContent = FileUtils.readFileToString(file).replaceAll(
+		                "this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/scayt.css\"", 
+		                "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/scayt.css\")");
+		FileUtils.writeStringToFile(file, fileContent);
+		
+		// modify wsc plugin to load wsc.css via CKEditor.getUrl
+		file = new File(resourcesDirectory
+                        + "ckeditor/ckeditor.js");
+		fileContent = FileUtils.readFileToString(file).replaceAll(
+                        "this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\"", 
+                        "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\")");
+		FileUtils.writeStringToFile(file, fileContent);
 	}
 
 	private static List<File> getResourcesList(File file) {
