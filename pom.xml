@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>resources-ckeditor</artifactId>
     <packaging>jar</packaging>
-    <name>resources-ckeditor</name>
+    <name>PrimeFaces Extensions Resources CKEditor</name>
     <description>
         <![CDATA[CKEditor Resources for PrimeFaces Extensions Project for Maven.]]>
     </description>
