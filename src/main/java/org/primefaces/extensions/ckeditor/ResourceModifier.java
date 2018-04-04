@@ -100,7 +100,7 @@ public class ResourceModifier {
                 fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=GAGE",
                             "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=GAGE\"");
 
-                FileUtils.writeStringToFile(resourceToModify, fileContent,Charset.defaultCharset());
+                FileUtils.writeStringToFile(resourceToModify, fileContent, Charset.defaultCharset());
             }
 
             String fileContent = "";
@@ -109,15 +109,15 @@ public class ResourceModifier {
             // modify smileys plugin to load the smileys via CKEditor.getUrl
             file = new File(PROJECT_DIRECTORY
                         + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/plugins/smiley/dialogs/smiley.js");
-            fileContent = FileUtils.readFileToString(file,Charset.defaultCharset()).replaceAll(
+            fileContent = FileUtils.readFileToString(file, Charset.defaultCharset()).replaceAll(
                         "CKEDITOR.tools.htmlEncode\\(e\\.smiley_path\\+h\\[a\\]\\)",
                         "CKEDITOR.tools.htmlEncode\\(CKEDITOR.getUrl\\(e\\.smiley_path\\+h\\[a\\]\\)\\)");
-            FileUtils.writeStringToFile(file, fileContent,Charset.defaultCharset());
+            FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
         }
 
         // read the main JS file
         final File file = new File(resourcesDirectory + "ckeditor/ckeditor.js");
-        String fileContent = FileUtils.readFileToString(file,Charset.defaultCharset());
+        String fileContent = FileUtils.readFileToString(file, Charset.defaultCharset());
 
         // modify copyFormatting plugin to load copyformatting.css via CKEditor.getUrl
         fileContent = fileContent.replaceAll(
@@ -135,7 +135,7 @@ public class ResourceModifier {
                     "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\")");
 
         // write file back out
-        FileUtils.writeStringToFile(file, fileContent,Charset.defaultCharset());
+        FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
     }
 
     private static List<File> getResourcesList(final File file) {
