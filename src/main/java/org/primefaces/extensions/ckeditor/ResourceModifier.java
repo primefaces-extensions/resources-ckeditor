@@ -137,6 +137,10 @@ public class ResourceModifier {
         fileContent = fileContent.replaceAll(
                 "this.path\\+\"dialogs/dialog.css\"",
                 "CKEDITOR.getUrl(this.path\\+\"dialogs/dialog.css\")");
+        
+        fileContent = fileContent.replaceAll(
+                "this.path\\+\"styles/tableselection.css\"",
+                "CKEDITOR.getUrl(this.path\\+\"styles/tableselection.css\")");
 
         // write file back out
         FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
