@@ -133,6 +133,10 @@ public class ResourceModifier {
         fileContent = fileContent.replaceAll(
                     "this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\"",
                     "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\")");
+        
+        fileContent = fileContent.replaceAll(
+                "this.path\\+\"dialogs/dialog.css\"",
+                "CKEDITOR.getUrl(this.path\\+\"dialogs/dialog.css\")");
 
         // write file back out
         FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
