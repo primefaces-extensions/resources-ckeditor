@@ -93,12 +93,12 @@ public class ResourceModifier {
                 }
 
                 // icons.png
-                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=GAGE",
-                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=GAGE\"");
+                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=72a83a5",
+                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=72a83a5\"");
 
                 // icons_hidpi.png
-                fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=GAGE",
-                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=GAGE\"");
+                fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=72a83a5",
+                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=72a83a5\"");
 
                 FileUtils.writeStringToFile(resourceToModify, fileContent, Charset.defaultCharset());
             }
@@ -133,6 +133,14 @@ public class ResourceModifier {
         fileContent = fileContent.replaceAll(
                     "this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\"",
                     "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\")");
+        
+        fileContent = fileContent.replaceAll(
+                "this.path\\+\"dialogs/dialog.css\"",
+                "CKEDITOR.getUrl(this.path\\+\"dialogs/dialog.css\")");
+        
+        fileContent = fileContent.replaceAll(
+                "this.path\\+\"styles/tableselection.css\"",
+                "CKEDITOR.getUrl(this.path\\+\"styles/tableselection.css\")");
 
         // write file back out
         FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
