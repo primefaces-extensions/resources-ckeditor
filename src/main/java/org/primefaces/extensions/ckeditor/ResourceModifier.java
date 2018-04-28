@@ -32,6 +32,12 @@ import org.apache.commons.lang3.StringUtils;
  * - extract new ckeditor files
  * - remove samples dir
  * - Add an empty skin.js file to the skin directory which does not contain a default skin.js
+ * - Before executing ResourceModifier, modify the short hash (e.g t=72a83a5) to match a new version of CKEditor
+ * - Execute ResourceModifier
+ * - Try to run CKEditor and observe if any error occurs on both browser console and server console
+ *    - The most common error is "Resources not found". If that's the case, please check if any new plugins's resources that 
+ *      need to be modified then add new rules inside ResourceModifier if needed
+ *    - Re-run ResourceModifier
  * </pre>
  */
 public class ResourceModifier {
