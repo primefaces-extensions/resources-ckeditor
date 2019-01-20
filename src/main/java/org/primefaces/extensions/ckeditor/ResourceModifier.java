@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
  * - extract new ckeditor files
  * - remove samples dir
  * - Add an empty skin.js file to the skin directory which does not contain a default skin.js
- * - Before executing ResourceModifier, modify the short hash (e.g t=72a83a5) to match a new version of CKEditor
+ * - Before executing ResourceModifier, modify the short hash (e.g t=7f3189e) to match a new version of CKEditor
  * - Execute ResourceModifier
  * - Try to run CKEditor and observe if any error occurs on both browser console and server console
  *    - The most common error is "Resources not found". If that's the case, please check if any new plugins's resources that 
@@ -43,6 +43,8 @@ import org.apache.commons.lang3.StringUtils;
 public class ResourceModifier {
 
     private static final String PROJECT_DIRECTORY = System.getProperty("user.dir");
+    
+    private static final String SHORT_HASH = "7f3189e";
 
     public static void main(final String[] args) throws IOException {
 
@@ -99,12 +101,12 @@ public class ResourceModifier {
                 }
 
                 // icons.png
-                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=72a83a5",
-                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=72a83a5\"");
+                fileContent = fileContent.replaceAll("url\\(icons.png\\?t=" + SHORT_HASH,
+                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons.png']}&t=" + SHORT_HASH +"\"");
 
                 // icons_hidpi.png
-                fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=72a83a5",
-                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=72a83a5\"");
+                fileContent = fileContent.replaceAll("url\\(icons_hidpi.png\\?t=" + SHORT_HASH,
+                            "url\\(\"#{resource['primefaces-extensions:" + relativeSkinPath + "/icons_hidpi.png']}&t=" + SHORT_HASH + "\"");
 
                 FileUtils.writeStringToFile(resourceToModify, fileContent, Charset.defaultCharset());
             }
