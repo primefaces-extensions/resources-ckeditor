@@ -1,4 +1,4 @@
-CKEDitor JSF Component
+CKEditor JSF Component
 ==================
 
 CKEditor resources for PrimeFaces Extensions
