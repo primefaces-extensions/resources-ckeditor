@@ -27,8 +27,7 @@ import org.apache.commons.io.FileUtils;
  * - Delete all files in the src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/ directory
  * - extract new ckeditor files
  * - remove samples dir
- * - Add an empty skin.js file to the skin directory which does not contain a default skin.js
- * - Before executing ResourceModifier, modify the short hash (e.g t=7f3189e) to match a new version of CKEditor
+ * - Before executing ResourceModifier, modify the short hash (e.g t=K5I7) to match a new version of CKEditor
  * - Execute ResourceModifier
  * - Try to run CKEditor and observe if any error occurs on both browser console and server console
  *    - The most common error is "Resources not found". If that's the case, please check if any new plugins's resources that
@@ -40,7 +39,7 @@ public class ResourceModifier {
 
     private static final String PROJECT_DIRECTORY = System.getProperty("user.dir");
 
-    private static final String SHORT_HASH = "7f3189e";
+    private static final String SHORT_HASH = "K5I7";
 
     private static final int INDEX_NOT_FOUND = -1;
 
@@ -48,7 +47,7 @@ public class ResourceModifier {
 
         final String resourcesDirectory = PROJECT_DIRECTORY + "/src/main/resources/META-INF/resources/primefaces-extensions/";
 
-        System.err.println("######## Modify skin styles....");
+        System.err.println("######## Modify skin styles...." + resourcesDirectory);
 
         final File skinsPath = new File(PROJECT_DIRECTORY + "/src/main/resources/META-INF/resources/primefaces-extensions/ckeditor/skins/");
 
@@ -138,12 +137,20 @@ public class ResourceModifier {
                     "CKEDITOR.getUrl(this.path\\+\"skins/\"\\+CKEDITOR.skin.name\\+\"/wsc.css\")");
 
         fileContent = fileContent.replaceAll(
-                    "this.path\\+\"dialogs/dialog.css\"",
-                    "CKEDITOR.getUrl(this.path\\+\"dialogs/dialog.css\")");
+                    "this.path\\+\"styles/dialog.css\"",
+                    "CKEDITOR.getUrl(this.path\\+\"styles/dialog.css\")");
 
         fileContent = fileContent.replaceAll(
                     "this.path\\+\"styles/tableselection.css\"",
                     "CKEDITOR.getUrl(this.path\\+\"styles/tableselection.css\")");
+
+        // Math JAX plugin images
+        fileContent = fileContent.replaceAll(
+                    "CKEDITOR.plugins.get\\(\"mathjax\"\\).path\\+\"images/loader.gif\"",
+                    "CKEDITOR.getUrl(CKEDITOR.plugins.get\\(\"mathjax\"\\).path\\+\"images/loader.gif\")");
+        fileContent = fileContent.replaceAll(
+                    "b.plugins.widget.path\\+\"images/handle.png",
+                    "CKEDITOR.getUrl(b.plugins.widget.path\\+\"images/handle.png\")\\+\"");
 
         // write file back out
         FileUtils.writeStringToFile(file, fileContent, Charset.defaultCharset());
